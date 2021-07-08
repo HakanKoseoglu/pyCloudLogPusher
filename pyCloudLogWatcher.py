@@ -3,6 +3,7 @@ import time
 import logging
 import os
 import requests
+import datetime
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.events import FileSystemEventHandler
@@ -22,7 +23,8 @@ def makecall(logLine):
     jsonLogLine['string']=logLine
     
     resp = requests.post(LogBookServer+'/index.php/api/qso',json=jsonLogLine)
-    print('Response:'+str(resp.status_code))
+    now = datetime.datetime.now()
+    print (now.strftime("%Y-%m-%d %H:%M:%S")+' Response:'+str(resp.status_code))
     print (resp)
     
 def processLogfile(filename):
