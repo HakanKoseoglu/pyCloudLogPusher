@@ -21,7 +21,8 @@ def makecall(logLine):
     jsonLogLine['key']=APIKey
     jsonLogLine['station_profile_id']=station_profile_id
     jsonLogLine['string']=logLine
-    
+    now = datetime.datetime.now()
+    print (now.strftime("%Y-%m-%d %H:%M:%S")+' Sending request')
     resp = requests.post(LogBookServer+'/index.php/api/qso',json=jsonLogLine)
     now = datetime.datetime.now()
     print (now.strftime("%Y-%m-%d %H:%M:%S")+' Response:'+str(resp.status_code))
